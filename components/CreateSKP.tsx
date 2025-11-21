@@ -414,7 +414,7 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
               <div 
                 className={`h-24 w-40 mx-auto flex items-end justify-center relative cursor-pointer transition-all ${
                   !formData.signatureAlpro 
-                    ? 'border-2 border-dashed border-orange-300 bg-orange-50 hover:bg-orange-100 animate-pulse print:border-0 print:bg-transparent print:animate-none' 
+                    ? 'border-2 border-dashed border-yellow-400 bg-yellow-50 hover:bg-yellow-100 animate-pulse print:border-0 print:bg-transparent print:animate-none' 
                     : 'hover:bg-gray-50'
                 }`}
                 onClick={() => openSignaturePad('alpro')}
@@ -422,10 +422,10 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
                 {formData.signatureAlpro ? (
                     <img src={formData.signatureAlpro} alt="Sign Alpro" className="absolute bottom-2 w-32 max-h-20 object-contain" />
                 ) : (
-                    <div className="flex flex-col items-center justify-center h-full w-full text-orange-600 font-bold print:hidden">
+                    <div className="flex flex-col items-center justify-center h-full w-full text-yellow-700 font-bold print:hidden p-2 text-center border border-yellow-300 rounded bg-yellow-100">
                         <MousePointerClick size={20} className="mb-1" />
                         <span className="text-[10px]">KLIK DISINI</span>
-                        <span className="text-[8px]">UNTUK TTD</span>
+                        <span className="text-[8px]">UNTUK TTD ALPRO</span>
                     </div>
                 )}
               </div>
@@ -442,7 +442,7 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
                <div 
                 className={`h-20 w-48 mx-auto flex items-end justify-center relative cursor-pointer transition-all ${
                   !formData.signaturePrincipal 
-                    ? 'border-2 border-dashed border-orange-300 bg-orange-50 hover:bg-orange-100 animate-pulse print:border-0 print:bg-transparent print:animate-none' 
+                    ? 'border-2 border-dashed border-yellow-400 bg-yellow-50 hover:bg-yellow-100 animate-pulse print:border-0 print:bg-transparent print:animate-none' 
                     : 'hover:bg-gray-50'
                 }`}
                 onClick={() => openSignaturePad('principal')}
@@ -450,10 +450,10 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
                 {formData.signaturePrincipal ? (
                     <img src={formData.signaturePrincipal} alt="Sign Principal" className="absolute bottom-2 w-32 max-h-20 object-contain" />
                 ) : (
-                    <div className="flex flex-col items-center justify-center h-full w-full text-orange-600 font-bold print:hidden">
+                    <div className="flex flex-col items-center justify-center h-full w-full text-yellow-700 font-bold print:hidden p-2 text-center border border-yellow-300 rounded bg-yellow-100">
                         <MousePointerClick size={20} className="mb-1" />
                         <span className="text-[10px]">KLIK DISINI</span>
-                        <span className="text-[8px]">UNTUK TTD</span>
+                        <span className="text-[8px]">UNTUK TTD PRINCIPAL</span>
                     </div>
                 )}
               </div>
@@ -500,9 +500,9 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
         
         {/* Warning Banner for Signature */}
         {!formData.signatureAlpro && !formData.signaturePrincipal && (
-            <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-4 rounded shadow-sm print:hidden">
-                <p className="font-bold flex items-center gap-2"><PenTool size={18} /> Tanda Tangan Belum Lengkap</p>
-                <p className="text-sm">Silakan scroll ke bawah dan klik kotak tanda tangan untuk menambahkan tanda tangan digital.</p>
+            <div className="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-4 rounded shadow-sm print:hidden animate-bounce">
+                <p className="font-bold flex items-center gap-2"><PenTool size={18} /> Tanda Tangan Diperlukan!</p>
+                <p className="text-sm">Klik pada kotak berwarna kuning di bagian bawah surat untuk menambahkan tanda tangan.</p>
             </div>
         )}
 
@@ -529,9 +529,9 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
           </button>
           <button 
             onClick={() => setMode('preview')} 
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2 transition-colors"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg shadow-blue-200"
           >
-             Preview & TTD
+             <PenTool size={16} /> Lanjut: Preview & Tanda Tangan
           </button>
         </div>
       </div>
