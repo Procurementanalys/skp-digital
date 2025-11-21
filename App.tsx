@@ -31,7 +31,7 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (currentView) {
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard skpList={skpList} />;
       case 'create':
         return <CreateSKP onSave={handleSaveSKP} onCancel={() => setCurrentView('dashboard')} totalDocuments={skpList.length} />;
       case 'list':
@@ -83,15 +83,21 @@ const App: React.FC = () => {
                             {skp.products.length} Produk • Periode: {skp.periodStart} s.d {skp.periodEnd}
                           </p>
                         </div>
-                        <button 
-                          onClick={() => {
-                            // In a real app, this would load the SKP into CreateSKP for viewing/editing
-                            alert("Fitur edit arsip akan segera tersedia.");
-                          }}
-                          className="text-sm text-orange-600 font-medium hover:underline"
-                        >
-                          Detail
-                        </button>
+                        <div className="flex flex-col items-end gap-2">
+                            <button 
+                            onClick={() => {
+                                // Ideally, you would set 'edit' mode here with the specific ID
+                                alert("Fitur edit arsip akan segera tersedia.");
+                            }}
+                            className="text-sm text-orange-600 font-medium hover:underline"
+                            >
+                            Detail
+                            </button>
+                            <div className="flex gap-1">
+                                {skp.signatureAlpro && <span className="px-2 py-0.5 rounded text-[10px] bg-green-100 text-green-700">TTD Alpro</span>}
+                                {skp.signaturePrincipal && <span className="px-2 py-0.5 rounded text-[10px] bg-green-100 text-green-700">TTD Principal</span>}
+                            </div>
+                        </div>
                       </div>
                    </div>
                 ))}
@@ -100,7 +106,7 @@ const App: React.FC = () => {
           </div>
         );
       default:
-        return <Dashboard />;
+        return <Dashboard skpList={skpList} />;
     }
   };
 

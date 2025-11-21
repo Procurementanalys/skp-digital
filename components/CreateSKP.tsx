@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, Printer, ArrowLeft, Plus, Trash2, Sparkles, Loader2, PenTool } from 'lucide-react';
+import { Save, Printer, ArrowLeft, Plus, Trash2, Sparkles, Loader2, PenTool, MousePointerClick } from 'lucide-react';
 import { SKPData, ProductItem, EntityInfo, CompanyType } from '../types';
 import { extractPromoData } from '../services/geminiService';
 import { SignaturePad } from './SignaturePad';
@@ -412,15 +412,20 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
               
               {/* Alpro Signature Area */}
               <div 
-                className="h-24 w-40 mx-auto flex items-end justify-center relative cursor-pointer hover:bg-gray-50 transition-colors"
+                className={`h-24 w-40 mx-auto flex items-end justify-center relative cursor-pointer transition-all ${
+                  !formData.signatureAlpro 
+                    ? 'border-2 border-dashed border-orange-300 bg-orange-50 hover:bg-orange-100 animate-pulse print:border-0 print:bg-transparent print:animate-none' 
+                    : 'hover:bg-gray-50'
+                }`}
                 onClick={() => openSignaturePad('alpro')}
               >
                 {formData.signatureAlpro ? (
                     <img src={formData.signatureAlpro} alt="Sign Alpro" className="absolute bottom-2 w-32 max-h-20 object-contain" />
                 ) : (
-                    <div className="text-xs text-gray-400 mb-4 print:hidden flex flex-col items-center">
-                        <PenTool size={14} className="mb-1" />
-                        Klik utk TTD
+                    <div className="flex flex-col items-center justify-center h-full w-full text-orange-600 font-bold print:hidden">
+                        <MousePointerClick size={20} className="mb-1" />
+                        <span className="text-[10px]">KLIK DISINI</span>
+                        <span className="text-[8px]">UNTUK TTD</span>
                     </div>
                 )}
               </div>
@@ -435,15 +440,20 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
               
                {/* Principal Signature Area */}
                <div 
-                className="h-20 w-48 mx-auto flex items-end justify-center relative cursor-pointer hover:bg-gray-50 transition-colors"
+                className={`h-20 w-48 mx-auto flex items-end justify-center relative cursor-pointer transition-all ${
+                  !formData.signaturePrincipal 
+                    ? 'border-2 border-dashed border-orange-300 bg-orange-50 hover:bg-orange-100 animate-pulse print:border-0 print:bg-transparent print:animate-none' 
+                    : 'hover:bg-gray-50'
+                }`}
                 onClick={() => openSignaturePad('principal')}
               >
                 {formData.signaturePrincipal ? (
                     <img src={formData.signaturePrincipal} alt="Sign Principal" className="absolute bottom-2 w-32 max-h-20 object-contain" />
                 ) : (
-                    <div className="text-xs text-gray-400 mb-4 print:hidden flex flex-col items-center">
-                        <PenTool size={14} className="mb-1" />
-                        Klik utk TTD
+                    <div className="flex flex-col items-center justify-center h-full w-full text-orange-600 font-bold print:hidden">
+                        <MousePointerClick size={20} className="mb-1" />
+                        <span className="text-[10px]">KLIK DISINI</span>
+                        <span className="text-[8px]">UNTUK TTD</span>
                     </div>
                 )}
               </div>
@@ -487,6 +497,15 @@ export const CreateSKP: React.FC<CreateSKPProps> = ({ onSave, onCancel, totalDoc
             </button>
           </div>
         </div>
+        
+        {/* Warning Banner for Signature */}
+        {!formData.signatureAlpro && !formData.signaturePrincipal && (
+            <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-4 rounded shadow-sm print:hidden">
+                <p className="font-bold flex items-center gap-2"><PenTool size={18} /> Tanda Tangan Belum Lengkap</p>
+                <p className="text-sm">Silakan scroll ke bawah dan klik kotak tanda tangan untuk menambahkan tanda tangan digital.</p>
+            </div>
+        )}
+
         {/* The Document */}
         <PrintView />
       </div>

@@ -1,6 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Handle both Vite import.meta.env and standard process.env
+const apiKey = (import.meta as any).env?.VITE_API_KEY || process.env.API_KEY;
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 export const extractPromoData = async (text: string): Promise<any> => {
   try {
